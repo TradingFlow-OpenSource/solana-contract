@@ -1,0 +1,17 @@
+[features]
+seeds = false
+skip-lint = false
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Devnet"
+wallet = "test/admin-keypair.json"
+
+[programs.devnet]
+personal_vault = "31dyPJ26MF8kDSGC6nKWPvxnCGRCrR2uESVjSgn6MAfQ"
+
+
+[scripts]
+test = "cd test && yarn run ts-mocha -p tsconfig.json -t 1000000 test.ts" 

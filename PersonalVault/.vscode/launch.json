@@ -1,0 +1,84 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Raydium",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/ts-node",
+      "args": ["${workspaceFolder}/test/raydium/raydium.ts"],
+      "cwd": "${workspaceFolder}/test",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "NODE_ENV": "development",
+        "TS_NODE_PROJECT": "${workspaceFolder}/test/tsconfig.json"
+      },
+      "sourceMaps": true,
+      "outFiles": ["${workspaceFolder}/**/*.js"],
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "stopOnEntry": false,
+      "restart": true
+    },
+    {
+      "name": "Debug Test",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/ts-node",
+      "args": ["${workspaceFolder}/test/test.ts"],
+      "cwd": "${workspaceFolder}/test",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "NODE_ENV": "development",
+        "TS_NODE_PROJECT": "${workspaceFolder}/test/tsconfig.json"
+      },
+      "sourceMaps": true,
+      "outFiles": ["${workspaceFolder}/**/*.js"],
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "stopOnEntry": false,
+      "restart": true
+    },
+    {
+      "name": "Debug Test (Current File)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/ts-node",
+      "args": ["${file}"],
+      "cwd": "${workspaceFolder}/test",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "NODE_ENV": "development",
+        "TS_NODE_PROJECT": "${workspaceFolder}/test/tsconfig.json"
+      },
+      "sourceMaps": true,
+      "stopOnEntry": false,
+      "restart": true
+    },
+    {
+      "name": "Debug with Breakpoints",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/ts-node",
+      "args": ["${workspaceFolder}/test/test.ts"],
+      "cwd": "${workspaceFolder}/test",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "NODE_ENV": "development",
+        "TS_NODE_PROJECT": "${workspaceFolder}/test/tsconfig.json"
+      },
+      "sourceMaps": true,
+      "stopOnEntry": false,
+      "restart": true,
+      "trace": true
+    }
+  ]
+} 

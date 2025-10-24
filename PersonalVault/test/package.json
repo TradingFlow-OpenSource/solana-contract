@@ -1,0 +1,27 @@
+{
+  "name": "personal-vault-test",
+  "version": "1.0.0",
+  "description": "Personal Vault Test Suite",
+  "main": "test.ts",
+  "scripts": {
+    "test": "ts-node test.ts",
+    "test:sol": "ts-node test-sol.ts",
+    "test:wsol": "ts-node test-wsol.ts",
+    "test:wsol-unwrap": "ts-node test-wsol.ts --unwrap",
+    "build": "tsc",
+    "dev": "ts-node --watch test.ts"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.30.0",
+    "@raydium-io/raydium-sdk-v2": "^0.2.18-alpha",
+    "@solana/spl-token": "^0.4.13",
+    "@solana/web3.js": "^1.87.0",
+    "bn.js": "^5.2.2",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-mocha": "^11.1.0"
+  }
+}

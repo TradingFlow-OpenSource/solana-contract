@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020"],
+    "outDir": "./dist",
+    "rootDir": "./",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+  },
+  "include": [
+    "*.ts"
+, "raydium/test_direct_raydium_swap.ts", "raydium/test_pool_simple.ts", "raydium/test_pool_swap_directly.ts", "raydium/test_raydium_sdk_swap.ts", "raydium/check_account_owner.ts", "raydium/check_exbitmap.ts", "raydium/check_raydium_program.ts", "raydium/verify_clmm_accounts.ts", "raydium/verify_pool_accounts.ts", "raydium/find_pools_onchain.ts", "raydium/find_sol_usdc_pool_detailed.ts", "raydium/find_sol_usdc_pools.ts", "raydium/debug_tickarray_owner.ts", "raydium/compare_account_structures.ts", "raydium/constants.ts", "raydium/debug_account_mapping.ts", "raydium/debug_account_order.ts", "raydium/debug_clmm_structure.ts", "raydium/debug_fix_account_order.ts", "raydium/debug_pool_keys.ts", "raydium/debug_raydium_clmm_order.ts", "raydium/event_log.ts"  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+} 

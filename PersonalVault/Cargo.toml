@@ -1,0 +1,33 @@
+[package]
+name = "personal-vault"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+name = "personal_vault"
+
+[features]
+no-entrypoint = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+init-if-needed = []
+default = []
+devnet = []
+test-mode = []
+mock = []
+anchor-debug = []
+custom-heap = []
+custom-panic = []
+
+[dependencies]
+anchor-lang = { version = "0.31.1", features = ["init-if-needed"], default-features = false }
+anchor-spl = { version = "0.31.1", features = ["token", "associated_token", "memo"], default-features = false }
+bytemuck = "1.16.3"
+spl-token-2022 = "6.0.0"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }
+
+[profile.release]
+overflow-checks = true

@@ -1,0 +1,848 @@
+{
+  "version": "0.1.0",
+  "name": "personal_vault",
+  "instructions": [
+    {
+      "name": "initializeGlobalConfig",
+      "accounts": [
+        {
+          "name": "globalConfig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "botAddress",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "setBot",
+      "accounts": [
+        {
+          "name": "globalConfig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "newBotAddress",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "setAdmin",
+      "accounts": [
+        {
+          "name": "globalConfig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "newAdmin",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "createBalanceManager",
+      "accounts": [
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "globalConfig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "userDeposit",
+      "accounts": [
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vaultTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "mint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "userDepositSol",
+      "accounts": [
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "userWithdraw",
+      "accounts": [
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vaultTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "mint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "userWithdrawSol",
+      "accounts": [
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "getBalance",
+      "accounts": [
+        {
+          "name": "vault",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "token",
+          "type": "publicKey"
+        }
+      ],
+      "returns": "u64"
+    },
+    {
+      "name": "wrapSol",
+      "accounts": [
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "wsolAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "wsolMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "unwrapSol",
+      "accounts": [
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "wsolAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "wsolMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "sendTradeSignal",
+      "accounts": [
+        {
+          "name": "executor",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "dexProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "tokenIn",
+          "type": "publicKey"
+        },
+        {
+          "name": "tokenOut",
+          "type": "publicKey"
+        },
+        {
+          "name": "amountIn",
+          "type": "u64"
+        },
+        {
+          "name": "slippageBps",
+          "type": "u16"
+        },
+        {
+          "name": "poolType",
+          "type": "u8"
+        }
+      ],
+      "returns": "u64"
+    }
+  ],
+  "accounts": [
+    {
+      "name": "GlobalConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "publicKey"
+          },
+          {
+            "name": "bot",
+            "type": "publicKey"
+          },
+          {
+            "name": "isInitialized",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PersonalVault",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "investor",
+            "type": "publicKey"
+          },
+          {
+            "name": "isInitialized",
+            "type": "bool"
+          },
+          {
+            "name": "isLocked",
+            "type": "bool"
+          },
+          {
+            "name": "balances",
+            "type": {
+              "vec": {
+                "defined": "TokenBalance"
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "TokenBalance",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token",
+            "type": "publicKey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DexType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "RaydiumAmm"
+          }
+        ]
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "BalanceManagerCreatedEvent",
+      "fields": [
+        {
+          "name": "user",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "vault",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "timestamp",
+          "type": "i64",
+          "index": false
+        },
+        {
+          "name": "timestampMicroseconds",
+          "type": "u64",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "UserDepositEvent",
+      "fields": [
+        {
+          "name": "user",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "token",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "assetMetadata",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "timestamp",
+          "type": "i64",
+          "index": false
+        },
+        {
+          "name": "timestampMicroseconds",
+          "type": "u64",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "UserWithdrawEvent",
+      "fields": [
+        {
+          "name": "user",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "token",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "assetMetadata",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "timestamp",
+          "type": "i64",
+          "index": false
+        },
+        {
+          "name": "timestampMicroseconds",
+          "type": "u64",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "TradeSignalEvent",
+      "fields": [
+        {
+          "name": "user",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "executor",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "tokenIn",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "tokenOut",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "fromAssetMetadata",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "toAssetMetadata",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "amountIn",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "amountOutMin",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "amountOut",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "slippageBps",
+          "type": "u16",
+          "index": false
+        },
+        {
+          "name": "feeRecipient",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "feeAmount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "timestamp",
+          "type": "i64",
+          "index": false
+        },
+        {
+          "name": "timestampMicroseconds",
+          "type": "u64",
+          "index": false
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidBotAddress",
+      "msg": "无效的机器人地址"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidAdminAddress",
+      "msg": "无效的管理员地址"
+    },
+    {
+      "code": 6002,
+      "name": "SameBotAddress",
+      "msg": "相同的机器人地址"
+    },
+    {
+      "code": 6003,
+      "name": "SameAdminAddress",
+      "msg": "相同的管理员地址"
+    },
+    {
+      "code": 6004,
+      "name": "OnlyInvestor",
+      "msg": "只有投资者可以操作"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidAmount",
+      "msg": "无效金额"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidTokenPair",
+      "msg": "输入和输出代币不能相同"
+    },
+    {
+      "code": 6007,
+      "name": "InsufficientBalance",
+      "msg": "余额不足"
+    },
+    {
+      "code": 6008,
+      "name": "VaultNotInitialized",
+      "msg": "金库未初始化"
+    },
+    {
+      "code": 6009,
+      "name": "Unauthorized",
+      "msg": "未授权操作"
+    },
+    {
+      "code": 6010,
+      "name": "OnlyBotOrAdmin",
+      "msg": "只有机器人或管理员可以操作"
+    },
+    {
+      "code": 6011,
+      "name": "InvalidFeeRate",
+      "msg": "无效费率"
+    },
+    {
+      "code": 6012,
+      "name": "InsufficientOutputAmount",
+      "msg": "输出金额不足"
+    },
+    {
+      "code": 6013,
+      "name": "GlobalConfigNotInitialized",
+      "msg": "全局配置未初始化"
+    },
+    {
+      "code": 6014,
+      "name": "ReentrantCall",
+      "msg": "检测到重入调用"
+    },
+    {
+      "code": 6015,
+      "name": "InvalidSlippage",
+      "msg": "无效的滑点设置"
+    },
+    {
+      "code": 6016,
+      "name": "InvalidAccountSize",
+      "msg": "无效的账户大小"
+    },
+    {
+      "code": 6017,
+      "name": "InvalidAccountData",
+      "msg": "无效的账户数据"
+    },
+    {
+      "code": 6018,
+      "name": "MissingGlobalConfig",
+      "msg": "缺少全局配置账户"
+    },
+    {
+      "code": 6019,
+      "name": "InvalidGlobalConfig",
+      "msg": "无效的全局配置账户"
+    },
+    {
+      "code": 6020,
+      "name": "InvalidPoolState",
+      "msg": "无效的池子状态"
+    },
+    {
+      "code": 6021,
+      "name": "PoolNotFound",
+      "msg": "池子不存在"
+    },
+    {
+      "code": 6022,
+      "name": "RaydiumClmmCallFailed",
+      "msg": "Raydium CLMM 程序调用失败"
+    },
+    {
+      "code": 6023,
+      "name": "RaydiumClmmAccountDerivationFailed",
+      "msg": "Raydium CLMM 账户推导失败"
+    },
+    {
+      "code": 6024,
+      "name": "RaydiumClmmInstructionFormatError",
+      "msg": "Raydium CLMM 指令格式错误"
+    },
+    {
+      "code": 6025,
+      "name": "InvalidAmmConfigAccount",
+      "msg": "无效的 AMM 配置账户"
+    },
+    {
+      "code": 6026,
+      "name": "InvalidPoolStateAccount",
+      "msg": "无效的池状态账户"
+    },
+    {
+      "code": 6027,
+      "name": "InvalidTokenAccount",
+      "msg": "无效的代币账户"
+    },
+    {
+      "code": 6028,
+      "name": "InvalidPoolVaultAccount",
+      "msg": "无效的池子金库账户"
+    },
+    {
+      "code": 6029,
+      "name": "InvalidObservationStateAccount",
+      "msg": "无效的观察状态账户"
+    },
+    {
+      "code": 6030,
+      "name": "InvalidTokenMintAddress",
+      "msg": "无效的代币 mint 地址"
+    },
+    {
+      "code": 6031,
+      "name": "DuplicateAccountAddress",
+      "msg": "发现重复的账户地址"
+    },
+    {
+      "code": 6032,
+      "name": "InvalidAccountAddressFormat",
+      "msg": "账户地址格式无效"
+    },
+    {
+      "code": 6033,
+      "name": "SwapExecutionFailed",
+      "msg": "交换执行失败"
+    },
+    {
+      "code": 6034,
+      "name": "InsufficientAccounts",
+      "msg": "账户数量不足"
+    },
+    {
+      "code": 6035,
+      "name": "InvalidVaultAccount",
+      "msg": "无效的金库账户"
+    },
+    {
+      "code": 6036,
+      "name": "InvalidGlobalConfigAccount",
+      "msg": "无效的全局配置账户"
+    }
+  ]
+}
