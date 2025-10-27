@@ -1,129 +1,129 @@
-# PersonalVault Solana 合约
+# PersonalVault Solana Contract
 
-## 项目概述
+## Project Overview
 
-PersonalVault 是一个基于 Solana 的去中心化个人资产管理合约，允许用户安全地存储、管理和交易多种代币资产。合约采用 Anchor 框架开发，提供了完整的资产管理和 DEX 集成功能。
+PersonalVault is a decentralized personal asset management contract built on Solana, enabling users to securely store, manage, and trade multiple token assets. Developed using the Anchor framework, the contract provides comprehensive asset management and DEX integration capabilities.
 
-## 核心功能
+## Core Features
 
-### 1. 账户管理
-- **全局配置 (GlobalConfig)**: 存储管理员和机器人地址，控制系统级权限
-- **个人金库 (PersonalVault)**: 每个用户独立的资产管理账户，支持多币种余额管理
+### 1. Account Management
+- **GlobalConfig**: Stores admin and bot addresses, controls system-level permissions
+- **PersonalVault**: Independent asset management account for each user, supports multi-currency balance management
 
-### 2. 资产操作
-- **存款功能**: 
-  - `user_deposit`: 存入 SPL 代币（如 USDC）
-  - `user_deposit_sol`: 存入原生 SOL
-- **取款功能**:
-  - `user_withdraw`: 取出 SPL 代币
-  - `user_withdraw_sol`: 取出原生 SOL
-- **余额查询**: 实时查询各代币余额
+### 2. Asset Operations
+- **Deposit Functions**: 
+  - `user_deposit`: Deposit SPL tokens (e.g., USDC)
+  - `user_deposit_sol`: Deposit native SOL
+- **Withdrawal Functions**:
+  - `user_withdraw`: Withdraw SPL tokens
+  - `user_withdraw_sol`: Withdraw native SOL
+- **Balance Query**: Real-time balance queries for all tokens
 
-### 3. 交易功能
-- **自动交易信号 (send_trade_signal)**: 
-  - 支持管理员或授权机器人发起交易
-  - 集成 Raydium CLMM DEX
-  - 自动处理代币交换
-  - 支持滑点保护
+### 3. Trading Functions
+- **Automated Trade Signal (send_trade_signal)**: 
+  - Supports trade initiation by admins or authorized bots
+  - Integrates Raydium CLMM DEX
+  - Automatic token swap processing
+  - Slippage protection support
 
-### 4. 权限管理
-- **管理员权限**: 可以设置机器人地址、发起交易信号
-- **机器人权限**: 可以代表用户发起自动交易
-- **用户权限**: 控制自己的资产存取
+### 4. Permission Management
+- **Admin Permissions**: Can set bot addresses and initiate trade signals
+- **Bot Permissions**: Can initiate automated trades on behalf of users
+- **User Permissions**: Control their own asset deposits and withdrawals
 
-## 测试脚本功能 (test.ts)
+## Test Script Features (test.ts)
 
-### 测试流程
+### Testing Workflow
 
-#### 步骤 1: 初始化全局配置
+#### Step 1: Initialize Global Configuration
 ```typescript
 initializeGlobalConfig(botAddress)
 ```
-- 创建全局配置 PDA 账户
-- 设置管理员和机器人地址
-- 只需执行一次
+- Creates global configuration PDA account
+- Sets admin and bot addresses
+- Only needs to be executed once
 
-#### 步骤 2: 创建余额管理器
+#### Step 2: Create Balance Manager
 ```typescript
 createBalanceManager(globalConfigPda, userKeypair)
 ```
-- 为每个用户创建独立的金库 PDA 账户
-- 初始化用户的资产管理结构
-- 支持多币种余额追踪
+- Creates independent vault PDA account for each user
+- Initializes user's asset management structure
+- Supports multi-currency balance tracking
 
-#### 步骤 3: 资产存取测试
+#### Step 3: Asset Deposit and Withdrawal Testing
 ```typescript
-// SOL 存款
+// SOL deposit
 userDepositSol(vaultPda, amount, userKeypair)
 
-// SPL 代币存款（如 USDC）
+// SPL token deposit (e.g., USDC)
 userDeposit(vaultPda, mint, amount, userKeypair)
 
-// 余额查询
+// Balance query
 getBalance(vaultPda, tokenMint)
 
-// 取款操作
+// Withdrawal operations
 userWithdrawSol(vaultPda, amount, userKeypair)
 userWithdraw(vaultPda, mint, amount, userKeypair)
 ```
 
-#### 步骤 4: DEX 交易集成测试
+#### Step 4: DEX Trading Integration Testing
 ```typescript
 sendTradeSignal(
   vaultPda,
-  tokenIn,      // 输入代币（如 WSOL）
-  tokenOut,     // 输出代币（如 USDC）
-  amountIn,     // 输入金额
-  slippageBps,  // 滑点（基点）
-  signerKeypair, // 签名者（管理员或机器人）
-  userKeypair   // 金库所有者
+  tokenIn,      // Input token (e.g., WSOL)
+  tokenOut,     // Output token (e.g., USDC)
+  amountIn,     // Input amount
+  slippageBps,  // Slippage (basis points)
+  signerKeypair, // Signer (admin or bot)
+  userKeypair   // Vault owner
 )
 ```
 
-### 测试特性
+### Testing Features
 
-1. **自动连接管理**: 
-   - 支持多个 RPC 端点自动切换
-   - 连接失败自动重试
+1. **Automatic Connection Management**: 
+   - Supports automatic switching between multiple RPC endpoints
+   - Automatic retry on connection failure
 
-2. **账户检查**:
-   - 自动检查账户是否已存在
-   - 避免重复初始化
+2. **Account Verification**:
+   - Automatically checks if accounts already exist
+   - Avoids duplicate initialization
 
-3. **余额验证**:
-   - 操作前后自动验证余额变化
-   - 确保交易正确执行
+3. **Balance Validation**:
+   - Automatically validates balance changes before and after operations
+   - Ensures transactions execute correctly
 
-4. **详细日志**:
-   - 完整的交易签名输出
-   - Solana Explorer 链接自动生成
-   - 错误日志详细记录
+4. **Detailed Logging**:
+   - Complete transaction signature output
+   - Automatic generation of Solana Explorer links
+   - Detailed error logging
 
-### 使用方式
+### Usage
 
 ```bash
-# 安装依赖
+# Install dependencies
 npm install
 
-# 运行完整测试流程
+# Run complete test workflow
 npx ts-node test/test.ts
 
-# 单独测试 Raydium 集成
+# Test Raydium integration separately
 npx ts-node test/raydium/test_raydium_sdk_swap.ts
 ```
 
-### 测试环境
+### Test Environment
 
-- **网络**: Solana Devnet
-- **程序 ID**: `FFbZem3yLs4Pr4LoXJPuqFp7CJsDvaYj9xQEkYboTaoJ`
-- **测试用户**: 
-  - admin: 管理员账户
-  - user1/user2: 普通用户账户
-  - bot: 自动化机器人账户
+- **Network**: Solana Devnet
+- **Program ID**: `FFbZem3yLs4Pr4LoXJPuqFp7CJsDvaYj9xQEkYboTaoJ`
+- **Test Users**: 
+  - admin: Administrator account
+  - user1/user2: Regular user accounts
+  - bot: Automated bot account
 
-### 关键文件
+### Key Files
 
-- `test/test.ts`: 主测试脚本
-- `test/raydium/constants.ts`: 共享常量和地址
-- `test/raydium/raydium.ts`: Raydium DEX 集成逻辑
-- `test/raydium/event_log.ts`: 事件日志解析
+- `test/test.ts`: Main test script
+- `test/raydium/constants.ts`: Shared constants and addresses
+- `test/raydium/raydium.ts`: Raydium DEX integration logic
+- `test/raydium/event_log.ts`: Event log parsing
